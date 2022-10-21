@@ -9,6 +9,9 @@ import { BookDetailsClickedEvent } from './book-card/book-card.component';
 })
 export class AppComponent {
   title = 'Workshop';
+
+  bookTitleSearchTerm = '';
+
   books: Book[] = [
     {
       title: 'How to win friends',
@@ -29,5 +32,9 @@ export class AppComponent {
 
   showDetailsView(event: BookDetailsClickedEvent): void {
     console.log('show details view for: ', event.book);
+  }
+
+  filter(event: Event): void {
+    this.bookTitleSearchTerm = (event.target as HTMLInputElement).value;
   }
 }
