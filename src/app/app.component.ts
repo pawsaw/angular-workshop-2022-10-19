@@ -1,33 +1,33 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Book } from './book';
+import { BookDetailsClickedEvent } from './book-card/book-card.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent {
   title = 'Workshop';
-  book: Book | null = null;
+  books: Book[] = [
+    {
+      title: 'How to win friends',
+      author: 'Dale Carnegie',
+      abstract: 'How to Win Friends and Influence ...',
+    },
+    {
+      title: 'The Willpower Instinct: How Self-Control Works ...',
+      author: 'Kelly McGonigal',
+      abstract: 'Based on Stanford University ...',
+    },
+    {
+      author: 'Simon Sinek',
+      title: 'Start with WHY',
+      abstract: "START WITH WHY shows that the leaders who've ...",
+    },
+  ];
 
-  private _timer: unknown;
-
-  ngOnInit(): void {
-    this._timer = setTimeout(() => {
-      this.book = {
-        title: 'My dummy book',
-        abstract: 'Lorem ipsum',
-        author: 'Max Mustermann',
-      };
-    }, 5000);
-  }
-
-  ngOnDestroy(): void {
-    // @ts-ignore
-    clearTimeout(this._timer);
-  }
-
-  showDetailsView(book: Book): void {
-    console.log('show details view for: ', book);
+  showDetailsView(event: BookDetailsClickedEvent): void {
+    console.log('show details view for: ', event.book);
   }
 }
