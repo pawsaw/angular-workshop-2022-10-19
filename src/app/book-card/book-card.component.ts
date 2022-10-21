@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Book } from '../book';
 
 export type BorderColor = 'red' | 'blue';
 
@@ -8,6 +9,9 @@ export type BorderColor = 'red' | 'blue';
   styleUrls: ['./book-card.component.scss'],
 })
 export class BookCardComponent implements OnInit {
+  @Input()
+  book: Book | null = null;
+
   // 1. readonly
   // 2. depending on the value of _mouseIn
   get color(): BorderColor {

@@ -3,13 +3,15 @@
   [style.borderColor]="color"
   (mouseenter)="mouseIn()"
   (mouseleave)="mouseOut()"
+  *ngIf="book; else loading"
 >
-  <h2>Title</h2>
-  <h3>Author</h3>
+  <h2>{{ book.title }}</h2>
+  <h3>{{ book.author }}</h3>
   <a href="#">Details</a>
   <p>
-    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla alias
-    maiores cumque non doloribus sed quae! Suscipit, temporibus! Quasi iusto,
-    debitis beatae veniam ad facere sed nisi necessitatibus porro accusantium?
+    {{ book.abstract }}
   </p>
 </div>
+<ng-template #loading>
+  <span>Loading book...</span>
+</ng-template>
