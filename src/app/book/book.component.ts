@@ -1,0 +1,40 @@
+import { Component, OnInit } from '@angular/core';
+import { Book } from './book';
+import { BookDetailsClickedEvent } from './book-card/book-card.component';
+
+@Component({
+  selector: 'app-book',
+  templateUrl: './book.component.html',
+  styleUrls: ['./book.component.scss'],
+})
+export class BookComponent implements OnInit {
+  ngOnInit(): void {}
+
+  bookTitleSearchTerm = '';
+
+  books: Book[] = [
+    {
+      title: 'How to win friends',
+      author: 'Dale Carnegie',
+      abstract: 'How to Win Friends and Influence ...',
+    },
+    {
+      title: 'The Willpower Instinct: How Self-Control Works ...',
+      author: 'Kelly McGonigal',
+      abstract: 'Based on Stanford University ...',
+    },
+    {
+      author: 'Simon Sinek',
+      title: 'Start with WHY',
+      abstract: "START WITH WHY shows that the leaders who've ...",
+    },
+  ];
+
+  showDetailsView(event: BookDetailsClickedEvent): void {
+    console.log('show details view for: ', event.book);
+  }
+
+  filter(event: Event): void {
+    this.bookTitleSearchTerm = (event.target as HTMLInputElement).value;
+  }
+}
