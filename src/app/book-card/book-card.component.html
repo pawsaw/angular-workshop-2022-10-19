@@ -7,7 +7,7 @@
 >
   <h2>{{ book.title }}</h2>
   <h3>{{ book.author }}</h3>
-  <a href="#">Details</a>
+  <a href="#" (click)="detailsClicked($event)">Details</a>
   <p>
     {{ book.abstract }}
   </p>

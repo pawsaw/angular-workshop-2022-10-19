@@ -31,4 +31,9 @@ export class BookCardComponent implements OnInit {
   mouseOut(): void {
     this._mouseIn = false;
   }
+
+  detailsClicked(event: MouseEvent): void {
+    event.preventDefault();
+    console.log('Details clicked', event);
+  }
 }
