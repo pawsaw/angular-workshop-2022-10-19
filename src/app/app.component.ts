@@ -26,4 +26,8 @@ export class AppComponent implements OnInit, OnDestroy {
     // @ts-ignore
     clearTimeout(this._timer);
   }
+
+  showDetailsView(book: Book): void {
+    console.log('show details view for: ', book);
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Book } from '../book';
 
 export type BorderColor = 'red' | 'blue';
@@ -11,6 +11,8 @@ export type BorderColor = 'red' | 'blue';
 export class BookCardComponent implements OnInit {
   @Input()
   book: Book | null = null;
+
+  @Output() detailsClicked = new EventEmitter<Book>();
 
   // 1. readonly
   // 2. depending on the value of _mouseIn
@@ -32,8 +34,9 @@ export class BookCardComponent implements OnInit {
     this._mouseIn = false;
   }
 
-  detailsClicked(event: MouseEvent): void {
+  handleDetailsClicked(event: MouseEvent): void {
     event.preventDefault();
-    console.log('Details clicked', event);
+
+    this.detailsClicked.emit(this.book!);
   }
 }
