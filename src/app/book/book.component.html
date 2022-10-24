@@ -1,6 +1,11 @@
-<input placeholder="Title filter" (input)="filter($event)" />
-<app-book-card
-  *ngFor="let book of books | bookFilter: bookTitleSearchTerm"
-  [book]="book"
-  (detailsClicked)="showDetailsView($event)"
-></app-book-card>
+<ng-container *ngIf="books; else loading">
+  <input placeholder="Title filter" (input)="filter($event)" />
+  <app-book-card
+    *ngFor="let book of books | bookFilter: bookTitleSearchTerm"
+    [book]="book"
+    (detailsClicked)="showDetailsView($event)"
+  ></app-book-card>
+</ng-container>
+<ng-template #loading>
+  <span>Loading books...</span>
+</ng-template>
