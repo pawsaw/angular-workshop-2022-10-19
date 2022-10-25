@@ -15,4 +15,10 @@ export class BookApiService {
   all(): Observable<Book[]> {
     return this._http.get<Book[]>(`${environment.baseUrl}/${this.RESOURCE}`);
   }
+
+  one(isbn: string): Observable<Book> {
+    return this._http.get<Book>(
+      `${environment.baseUrl}/${this.RESOURCE}/${isbn}`
+    );
+  }
 }

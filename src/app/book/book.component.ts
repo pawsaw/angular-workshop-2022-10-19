@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { Book } from './book';
 import { BookApiService } from './book-api.service';
@@ -14,7 +15,10 @@ export class BookComponent implements OnInit, OnDestroy {
 
   books$: Observable<Book[] | null> = of(null);
 
-  constructor(public readonly _books: BookApiService) {}
+  constructor(
+    public readonly _books: BookApiService,
+    private readonly _router: Router
+  ) {}
 
   ngOnInit(): void {
     this.books$ = this._books.all();
@@ -23,7 +27,7 @@ export class BookComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {}
 
   showDetailsView(event: BookDetailsClickedEvent): void {
-    console.log('show details view for: ', event.book);
+    this._router.navigate(['books', event.book.isbn]);
   }
 
   filter(event: Event): void {
