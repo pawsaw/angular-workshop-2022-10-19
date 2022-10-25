@@ -1,11 +1,5 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { Book } from './book';
 import { BookApiService } from './book-api.service';
 import { BookDetailsClickedEvent } from './book-card/book-card.component';
@@ -14,33 +8,19 @@ import { BookDetailsClickedEvent } from './book-card/book-card.component';
   selector: 'app-book',
   templateUrl: './book.component.html',
   styleUrls: ['./book.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BookComponent implements OnInit, OnDestroy {
   bookTitleSearchTerm = '';
 
-  books: Book[] | null = null;
-  private _sub = new Subscription();
+  books$: Observable<Book[] | null> = of(null);
 
-  constructor(
-    public readonly _books: BookApiService,
-    private changeDetection: ChangeDetectorRef
-  ) {}
+  constructor(public readonly _books: BookApiService) {}
 
   ngOnInit(): void {
-    const sub = this._books.all().subscribe({
-      next: (books) => {
-        this.books = books;
-        this.changeDetection.detectChanges();
-      },
-    });
-
-    this._sub.add(sub);
+    this.books$ = this._books.all();
   }
 
-  ngOnDestroy(): void {
-    this._sub.unsubscribe();
-  }
+  ngOnDestroy(): void {}
 
   showDetailsView(event: BookDetailsClickedEvent): void {
     console.log('show details view for: ', event.book);

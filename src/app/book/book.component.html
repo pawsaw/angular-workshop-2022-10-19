@@ -1,4 +1,4 @@
-<ng-container *ngIf="books; else loading">
+<ng-container *ngIf="books$ | async as books; else loading">
   <input placeholder="Title filter" (input)="filter($event)" />
   <app-book-card
     *ngFor="let book of books | bookFilter: bookTitleSearchTerm"
