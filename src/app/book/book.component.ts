@@ -1,4 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Book } from './book';
 import { BookApiService } from './book-api.service';
@@ -8,6 +14,7 @@ import { BookDetailsClickedEvent } from './book-card/book-card.component';
   selector: 'app-book',
   templateUrl: './book.component.html',
   styleUrls: ['./book.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BookComponent implements OnInit, OnDestroy {
   bookTitleSearchTerm = '';
@@ -15,12 +22,16 @@ export class BookComponent implements OnInit, OnDestroy {
   books: Book[] | null = null;
   private _sub = new Subscription();
 
-  constructor(public readonly _books: BookApiService) {}
+  constructor(
+    public readonly _books: BookApiService,
+    private changeDetection: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     const sub = this._books.all().subscribe({
       next: (books) => {
         this.books = books;
+        this.changeDetection.detectChanges();
       },
     });
 
