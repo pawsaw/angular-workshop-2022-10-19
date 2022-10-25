@@ -1,0 +1,12 @@
+:host {
+  nav {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+  }
+}
+
+.active {
+  color: red;
+  text-decoration: underline;
+}

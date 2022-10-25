@@ -6,9 +6,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BookModule } from './book/book.module';
 import { MessageComponent } from './message/message.component';
+import { MyTableComponent } from './my-table/my-table.component';
+import { ColumnComponent } from './my-table/column/column.component';
+import { NavigationComponent } from './navigation/navigation.component';
 
 @NgModule({
-  declarations: [AppComponent, MessageComponent],
+  declarations: [AppComponent, MessageComponent, MyTableComponent, ColumnComponent, NavigationComponent],
   imports: [BrowserModule, AppRoutingModule, BookModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
