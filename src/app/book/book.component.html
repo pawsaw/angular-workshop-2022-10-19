@@ -1,11 +1,3 @@
-<ng-container *ngIf="books$ | async as books; else loading">
-  <input placeholder="Title filter" (input)="filter($event)" />
-  <app-book-card
-    *ngFor="let book of books | bookFilter: bookTitleSearchTerm"
-    [book]="book"
-    (detailsClicked)="showDetailsView($event)"
-  ></app-book-card>
-</ng-container>
-<ng-template #loading>
-  <span>Loading books...</span>
-</ng-template>
+<h1>Books</h1>
+
+<router-outlet></router-outlet>

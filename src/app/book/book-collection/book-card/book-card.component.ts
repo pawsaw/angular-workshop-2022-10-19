@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Book } from '../book';
+import { Book } from '../../book';
 
 export type BorderColor = 'red' | 'blue';
 
